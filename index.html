@@ -10,11 +10,24 @@
 <body>
     <div id="container">
 
-        <div id="intructions">
-            <section id="instructions">
+        <div id="div-intructions">
+            <section id="section-instructions">
                 <h1>Instruções para jogar</h1>
-                <p>Para mover um disco, clique sobre ele e, em seguida, clique na haste para a qual ele será movido.</p>
-                <p>Para iniciar ou resetar o jogo, clique no nivel de dificuldade</p>
+                <ul>
+                    <li>
+                        <p>Para mover um disco, clique sobre ele e, em seguida, clique na haste para a qual ele será movido.</p>
+                    </li>
+                    <li>
+                        <p>Você não pode colocar um bloco maior em cima de um bloco menor</p>
+                    </li>
+                    <li>
+                        <p>Você vencerá quando colocar todos os blocos na última haste</p>
+                    </li>
+
+                    <li>
+                        <p>Para iniciar ou resetar o jogo, clique no nivel de dificuldade</p>
+                    </li>
+                </ul>
             </section>
             
             <section id="buttons">
@@ -26,6 +39,12 @@
 
         <div id="game">
             
+        </div>
+
+        <div id="victory" class="hidden">
+            <h1>Parabéns</h1>
+            <p>Você terminou com <span id="movements">5</span> movimentos</p>
+         
         </div>
 
     </div>
