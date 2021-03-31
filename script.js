@@ -5,7 +5,7 @@ const hard = document.getElementById("hard")
 const gameArea = document.getElementById("game")
 const victoryScreen = document.getElementById("victory")
 let count = 0
-
+let selectBlock;
 
 const createDivs = (target) =>{
     const divStart = document.createElement('div')
@@ -112,20 +112,11 @@ const insertBlocks = (level, target) =>{
 
 const reset = () =>{
     const blocks = document.getElementsByClassName("block")
-    // const hastes = document.getElementsByClassName("hastes")
-    // const containerBlock = document.getElementsByClassName("container-block")
    
     while(blocks.length > 0){
         blocks[0].remove()
     }
 
-    // while(hastes.length > 0){
-    //     hastes[0].remove()
-    // }
-
-    // while(containerBlock.length > 0){
-    //     containerBlock[0].remove()
-    // }
     count = 0;
 }
 
@@ -135,21 +126,21 @@ const start = (nivel) => {
     const hasteStart  = document.querySelector("div#start div.hastes")
     insertBlocks(nivel, hasteStart)
 
-    a = true;
 }
 start("easy");
 easy.addEventListener('click',() => {
     start("easy")
-    
+    selectBlock = undefined;
 })
 
 medium.addEventListener('click',() =>{
     start("medium")
+    selectBlock = undefined;
 })
 
 hard.addEventListener('click',() =>{
     start("hard")
-
+    selectBlock = undefined;
 })
 /* adicionar blocos e hastes */
 
@@ -174,17 +165,25 @@ const haste3 = document.getElementById("haste3");
 const start1 = document.getElementById("start");
 const offSet = document.getElementById("offSet");
 const end = document.getElementById("end");
-let selectBlock;
+
 
 
 const mudarBloco = (selectBlock, haste) => {
 
-        let lastBloco = haste.lastElementChild;
-        if(lastBloco === null || lastBloco.clientWidth > selectBlock.clientWidth ){
-            haste.appendChild(selectBlock);
-            selectBlock = undefined;
-            count++;
-        }
+    
+    const lastBloco = haste.lastElementChild;
+
+    if (lastBloco === selectBlock ){
+        selectBlock.classList.remove("selectBlock")
+        haste.appendChild(selectBlock);
+        selectBlock = undefined;
+    }
+    else if(lastBloco === null || lastBloco.clientWidth > selectBlock.clientWidth ){
+        selectBlock.classList.remove("selectBlock")
+        haste.appendChild(selectBlock);
+        selectBlock = undefined;
+        count++;
+    }
         
     return selectBlock;
 }
@@ -192,39 +191,36 @@ start1.addEventListener('click',() =>{
     
     if (selectBlock !== undefined){
         selectBlock = mudarBloco(selectBlock, haste1);
-        console.log(count)
     }
     else if (haste1.lastElementChild !== null ){
         selectBlock = haste1.lastElementChild;
+        selectBlock.classList.add("selectBlock");
     }
-    
     
 });
 offSet.addEventListener('click',() =>{
     
     if(selectBlock !== undefined){
         selectBlock =  mudarBloco(selectBlock, haste2);
-        console.log(count)
     }
 
     else if(haste2.lastElementChild !== null ){
         selectBlock = haste2.lastElementChild;
+        selectBlock.classList.add("selectBlock");
     }
 
-    
 });
 end.addEventListener('click',() =>{
     
     if(selectBlock !== undefined){
         selectBlock = mudarBloco(selectBlock, haste3);
-        console.log(count)
     }
     else if(haste3.lastElementChild !== null ){
         selectBlock = haste3.lastElementChild;
+        selectBlock.classList.add("selectBlock");
     }
 
     winningCondition();
 });
-
 
 /* mover blocos */
