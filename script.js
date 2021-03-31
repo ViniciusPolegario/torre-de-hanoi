@@ -4,6 +4,7 @@ const medium = document.getElementById("medium")
 const hard = document.getElementById("hard")
 const gameArea = document.getElementById("game")
 const victoryScreen = document.getElementById("victory")
+let count = 0
 
 
 const createDivs = (target) =>{
@@ -25,30 +26,49 @@ const createDivs = (target) =>{
     target.appendChild(divEnd)
 }
 
-const createHastes = () =>{
+const createHastes = (num) =>{
     const haste = document.createElement("div")
-    haste.className = "hastes"
+    if(num === 1){
+        
+        haste.className = "hastes"
+        haste.id = "haste1"
+    }
+    else if(num === 2){
+        
+        haste.className = "hastes"
+        haste.id = "haste2"
+    }
+    else if(num === 3){
+        
+        haste.className = "hastes"
+        haste.id = "haste3"
+    }
     
-    return haste
+    
+    return haste;
 }
 
 const insertHastes = () => {
   
     const start = document.getElementById("start")
-    start.appendChild(createHastes())
+    start.appendChild(createHastes(1))
 
     const offSet = document.getElementById("offSet")
-    offSet.appendChild(createHastes())
+    offSet.appendChild(createHastes(2))
 
     const end = document.getElementById("end")
-    end.appendChild(createHastes())
+    end.appendChild(createHastes(3))
 
 }
 
-const createBlocks = (widthBlock, heightBlock) => {
+createDivs(gameArea)
+insertHastes()
+
+const createBlocks = (widthBlock, heightBlock, id) => {
     const randomColor = Math.floor(Math.random()* 16777215 ).toString(16);
     const block = document.createElement("div")
     block.className = "block"
+    block.id = `block${id}`
     block.style.background = `#${randomColor}`
     block.style.width = widthBlock    
     block.style.height = heightBlock    
@@ -79,11 +99,12 @@ const insertBlocks = (level, target) =>{
         height = 12 
         reduceWith = 11
     }
- 
+    let num = numberOfBlocks;
     for(let block = 0; block < numberOfBlocks; block++){
-        
-        target.appendChild(createBlocks(`${width}px`,`${height}px`))
+     
+        target.appendChild(createBlocks(`${width}px`,`${height}px`, num))
         width -= reduceWith
+        num--;
     }
 
 }
@@ -91,36 +112,35 @@ const insertBlocks = (level, target) =>{
 
 const reset = () =>{
     const blocks = document.getElementsByClassName("block")
-    const hastes = document.getElementsByClassName("hastes")
-    const containerBlock = document.getElementsByClassName("container-block")
+    // const hastes = document.getElementsByClassName("hastes")
+    // const containerBlock = document.getElementsByClassName("container-block")
    
     while(blocks.length > 0){
         blocks[0].remove()
     }
 
-    while(hastes.length > 0){
-        hastes[0].remove()
-    }
+    // while(hastes.length > 0){
+    //     hastes[0].remove()
+    // }
 
-    while(containerBlock.length > 0){
-        containerBlock[0].remove()
-    }
-
+    // while(containerBlock.length > 0){
+    //     containerBlock[0].remove()
+    // }
+    count = 0;
 }
 
 const start = (nivel) => {
     reset()
     victoryScreen.classList.add("hidden")
-    
-    createDivs(gameArea)
-    
-    insertHastes()
     const hasteStart  = document.querySelector("div#start div.hastes")
     insertBlocks(nivel, hasteStart)
-}
 
+    a = true;
+}
+start("easy");
 easy.addEventListener('click',() => {
     start("easy")
+    
 })
 
 medium.addEventListener('click',() =>{
@@ -129,10 +149,69 @@ medium.addEventListener('click',() =>{
 
 hard.addEventListener('click',() =>{
     start("hard")
+
 })
 /* adicionar blocos e hastes */
 
 /* mover blocos */
+
+const haste1 = document.getElementById("haste1");
+const haste2 = document.getElementById("haste2");
+const haste3 = document.getElementById("haste3");
+const start1 = document.getElementById("start");
+const offSet = document.getElementById("offSet");
+const end = document.getElementById("end");
+let selectBlock;
+
+
+const mudarBloco = (selectBlock, haste) => {
+
+        let lastBloco = haste.lastElementChild;
+        if(lastBloco === null || lastBloco.clientWidth > selectBlock.clientWidth ){
+            haste.appendChild(selectBlock);
+            selectBlock = undefined;
+            count++;
+        }
+        
+    return selectBlock;
+}
+start1.addEventListener('click',() =>{
+    
+    if (selectBlock !== undefined){
+        selectBlock = mudarBloco(selectBlock, haste1);
+        console.log(count)
+    }
+    else if (haste1.lastElementChild !== null ){
+        selectBlock = haste1.lastElementChild;
+    }
+    
+    
+});
+offSet.addEventListener('click',() =>{
+    
+    if(selectBlock !== undefined){
+        selectBlock =  mudarBloco(selectBlock, haste2);
+        console.log(count)
+    }
+
+    else if(haste2.lastElementChild !== null ){
+        selectBlock = haste2.lastElementChild;
+    }
+
+    
+});
+end.addEventListener('click',() =>{
+    
+    if(selectBlock !== undefined){
+        selectBlock = mudarBloco(selectBlock, haste3);
+        console.log(count)
+    }
+    else if(haste3.lastElementChild !== null ){
+        selectBlock = haste3.lastElementChild;
+    }
+
+});
+
 
 /* mover blocos */
 
