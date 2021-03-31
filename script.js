@@ -4,7 +4,9 @@ const medium = document.getElementById("medium")
 const hard = document.getElementById("hard")
 const gameArea = document.getElementById("game")
 const victoryScreen = document.getElementById("victory")
+let oldWidth = window.innerWidth
 let count = 0
+let reduceWith = 0
 let selectBlock;
 
 const createDivs = (target) =>{
@@ -79,25 +81,30 @@ const insertBlocks = (level, target) =>{
     let numberOfBlocks = 0 
     let width = 0
     let height = 0  
-    let reduceWith = 0
+    
 
     if(level === "easy"){
         numberOfBlocks = 2
         width = 60
-        height = 36 
+        height = 45
         reduceWith = 16
 
     }else if(level === "medium"){
         numberOfBlocks = 4
         width = 70
-        height = 20
+        height = 22.5
         reduceWith = 14 
 
     }else{
         numberOfBlocks = 6
         width = 80
-        height = 12 
+        height = 15 
         reduceWith = 11
+    }
+
+    if(window.innerWidth >= 768){
+        width += 60
+        reduceWith *= 2
     }
     let num = numberOfBlocks;
     for(let block = 0; block < numberOfBlocks; block++){
@@ -224,3 +231,29 @@ end.addEventListener('click',() =>{
 });
 
 /* mover blocos */
+const resizeBlocks = () =>{
+    const blocks = document.getElementsByClassName("block")
+    
+    if(window.innerWidth >= 768 && oldWidth < 768){
+        for(let block = 0; block < blocks.length; block++){
+            let width = blocks[block].style.width.replace("px","")
+            
+            blocks[block].style.width = `${width * 2}px`
+        }
+        oldWidth = window.innerWidth
+
+    }
+
+    if(window.innerWidth < 768 && oldWidth >= 768){
+        for(let block = 0; block < blocks.length; block++){
+            let width = blocks[block].style.width.replace("px","")
+            
+            blocks[block].style.width = `${width / 2}px`
+    }
+             oldWidth = window.innerWidth
+
+    }
+}
+
+
+window.addEventListener('resize', resizeBlocks)
