@@ -5,7 +5,7 @@ const hard = document.getElementById("hard")
 const gameArea = document.getElementById("game")
 const victoryScreen = document.getElementById("victory")
 let count = 0
-
+let selectBlock;
 
 const createDivs = (target) =>{
     const divStart = document.createElement('div')
@@ -126,21 +126,21 @@ const start = (nivel) => {
     const hasteStart  = document.querySelector("div#start div.hastes")
     insertBlocks(nivel, hasteStart)
 
-    a = true;
 }
 start("easy");
 easy.addEventListener('click',() => {
     start("easy")
-    
+    selectBlock = undefined;
 })
 
 medium.addEventListener('click',() =>{
     start("medium")
+    selectBlock = undefined;
 })
 
 hard.addEventListener('click',() =>{
     start("hard")
-
+    selectBlock = undefined;
 })
 /* adicionar blocos e hastes */
 
@@ -165,7 +165,7 @@ const haste3 = document.getElementById("haste3");
 const start1 = document.getElementById("start");
 const offSet = document.getElementById("offSet");
 const end = document.getElementById("end");
-let selectBlock;
+
 
 
 const mudarBloco = (selectBlock, haste) => {
