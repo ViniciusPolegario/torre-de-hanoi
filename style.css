@@ -2,11 +2,12 @@ body{
     padding: 0;
     margin: 0;
 }
-/* botões */
+
 section#buttons{
     display: flex;
     justify-content: space-around;
 }
+
 button{
     width: 100px;
     height: 25px;
@@ -27,9 +28,7 @@ button#medium{
 button#hard{
     background-color: rgb(247, 53, 53);
 }
-/* botões */
 
-/* hastes */
 div.hastes {
     width: 5px;
     height: 100%;
@@ -41,9 +40,6 @@ div.hastes {
     align-items: center;
 }
 
-/* hastes */
-
-/* blocos */
 #container {
     width: 320px;
     margin: 0 auto;
@@ -56,12 +52,14 @@ div#game{
     display: flex;
     height: 100px;
 }
+
 div.block{
-      
+    border-radius: 5px;
     background-color: cyan;
     transition: all 0.3s ease-in-out;
     
 }
+
 div.container-block{
     width: 32%;
     margin: 0 auto;
@@ -70,20 +68,17 @@ div.container-block{
     position: relative;
     
 }
+
 div.selectBlock {
     position: absolute;
     top: 0;
 
 }
-/* blocos */
 
-/* background */
 body{
     background-color:whitesmoke;
 }
-/* background */
 
-/* fonts */
 section#section-instructions {
     font-size: 16px;
     line-height: 1.5;
@@ -95,10 +90,6 @@ section#section-instructions h1{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
-/* fonts */
-
-/* tela de vitoria */
-
 
 div#victory{
     
@@ -119,7 +110,6 @@ div#victory.hidden{
     display: none;
     
 }
-/* tela de vitoria */
 
 @media only screen and (min-width: 768px){
     #container{
