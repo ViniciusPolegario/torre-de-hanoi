@@ -67,6 +67,10 @@ div.container-block{
     height: 100%;
     border-bottom: 5px solid black;
 }
+div.selectBlock {
+    position: absolute;
+    margin-bottom: 65px;
+}
 /* blocos */
 
 /* background */
