@@ -3,6 +3,7 @@ const easy = document.getElementById("easy")
 const medium = document.getElementById("medium")
 const hard = document.getElementById("hard")
 const gameArea = document.getElementById("game")
+const victoryScreen = document.getElementById("victory")
 let count = 0
 
 
@@ -130,7 +131,7 @@ const reset = () =>{
 
 const start = (nivel) => {
     reset()
-
+    victoryScreen.classList.add("hidden")
     const hasteStart  = document.querySelector("div#start div.hastes")
     insertBlocks(nivel, hasteStart)
 

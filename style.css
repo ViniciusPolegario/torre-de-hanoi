@@ -3,7 +3,30 @@ body{
     margin: 0;
 }
 /* botões */
+section#buttons{
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    width: 100px;
+    height: 25px;
+    font-size:16px ;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
 
+button#easy{
+    background-color: lightgreen;
+}
+
+button#medium{
+    background-color: lightskyblue;
+}
+
+button#hard{
+    background-color: rgb(247, 53, 53);
+}
 /* botões */
 
 /* hastes */
@@ -23,6 +46,8 @@ div.hastes {
 /* blocos */
 #container {
     width: 320px;
+    margin: 0 auto;
+    position: relative;
     
 }
 
@@ -45,13 +70,43 @@ div.container-block{
 /* blocos */
 
 /* background */
-
+body{
+    background-color:whitesmoke;
+}
 /* background */
 
 /* fonts */
+section#section-instructions {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0 10px;
+    
+}
 
+section#section-instructions h1{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
 /* fonts */
 
 /* tela de vitoria */
 
+
+div#victory{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(0, 0, 0, 0.432);
+    color: #fff;
+
+}
+div#victory.hidden{
+    display: none;
+    
+}
 /* tela de vitoria */
