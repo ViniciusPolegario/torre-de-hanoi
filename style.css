@@ -100,7 +100,7 @@ div#victory{
     width: 320px;
     height: 200px;
     margin: 0 auto;
-    
+    border-radius: 2px;
     transform: translateY(-140px);
     background-color: rgba(0, 0, 0, 0.753);
     color: #fff;
@@ -112,3 +112,13 @@ div#victory.hidden{
     
 }
 /* tela de vitoria */
+
+@media only screen and (min-width: 768px){
+    #container{
+        width: 500px;
+    }
+
+    div#victory{
+        width: 500px;
+    }
+}

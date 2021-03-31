@@ -84,20 +84,25 @@ const insertBlocks = (level, target) =>{
     if(level === "easy"){
         numberOfBlocks = 2
         width = 60
-        height = 36 
+        height = 45
         reduceWith = 16
 
     }else if(level === "medium"){
         numberOfBlocks = 4
         width = 70
-        height = 20
+        height = 22.5
         reduceWith = 14 
 
     }else{
         numberOfBlocks = 6
         width = 80
-        height = 12 
+        height = 15 
         reduceWith = 11
+    }
+
+    if(window.innerWidth >= 768){
+        width += 60
+        reduceWith *= 2
     }
     let num = numberOfBlocks;
     for(let block = 0; block < numberOfBlocks; block++){
