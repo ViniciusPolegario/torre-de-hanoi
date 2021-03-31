@@ -144,6 +144,19 @@ hard.addEventListener('click',() =>{
 })
 /* adicionar blocos e hastes */
 
+/* condição de vitoria */
+const winningCondition = () =>{
+    const totalBlocks = document.getElementsByClassName("block").length
+    const blocksInEnd = haste3.childElementCount
+    const movements = document.getElementById("movements")
+    if(totalBlocks === blocksInEnd){
+        victoryScreen.classList.remove("hidden")
+        movements.innerText = count
+    }
+    
+}
+/* condição de vitoria */
+
 /* mover blocos */
 
 const haste1 = document.getElementById("haste1");
@@ -207,10 +220,7 @@ end.addEventListener('click',() =>{
         selectBlock.classList.add("selectBlock");
     }
 
+    winningCondition();
 });
 
 /* mover blocos */
-
-/* condição de vitoria */
-
-/* condição de vitoria */
