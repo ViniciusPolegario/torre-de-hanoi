@@ -59,10 +59,11 @@ div#game{
 div.block{
       
     background-color: cyan;
+    transition: all 0.3s ease-in-out;
     
 }
 div.container-block{
-    width: 30%;
+    width: 32%;
     margin: 0 auto;
     height: 100%;
     border-bottom: 5px solid black;
@@ -122,10 +123,10 @@ div#victory.hidden{
 
 @media only screen and (min-width: 768px){
     #container{
-        width: 500px;
+        width: 550px;
     }
 
     div#victory{
-        width: 500px;
+        width: 550px;
     }
 }

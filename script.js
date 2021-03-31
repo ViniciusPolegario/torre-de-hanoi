@@ -103,7 +103,7 @@ const insertBlocks = (level, target) =>{
     }
 
     if(window.innerWidth >= 768){
-        width += 60
+        width *= 2
         reduceWith *= 2
     }
     let num = numberOfBlocks;
@@ -234,11 +234,13 @@ end.addEventListener('click',() =>{
 const resizeBlocks = () =>{
     const blocks = document.getElementsByClassName("block")
     
-    if(window.innerWidth >= 768 && oldWidth < 768){
+    if(window.innerWidth > 768 && oldWidth <= 768){
         for(let block = 0; block < blocks.length; block++){
             let width = blocks[block].style.width.replace("px","")
-            
-            blocks[block].style.width = `${width * 2}px`
+           
+                 blocks[block].style.width = `${Number(width) * 2}px`
+
+         
         }
         oldWidth = window.innerWidth
 
@@ -247,9 +249,14 @@ const resizeBlocks = () =>{
     if(window.innerWidth < 768 && oldWidth >= 768){
         for(let block = 0; block < blocks.length; block++){
             let width = blocks[block].style.width.replace("px","")
+            console.log(width)
             
-            blocks[block].style.width = `${width / 2}px`
-    }
+                blocks[block].style.width = `${Number(width) / 2}px`
+
+           
+            
+        }
+
              oldWidth = window.innerWidth
 
     }
