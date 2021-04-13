@@ -9,62 +9,33 @@ let count = 0
 let reduceWith = 0
 let selectBlock;
 
-const createDivs = (target) =>{
-    const divStart = document.createElement('div')
-    divStart.id = "start"
-    divStart.className = "container-block"
-    target.appendChild(divStart)
+const createContainerOfHaste = (id,target) =>{
+    const divContainer = document.createElement('div')
+    divContainer.id = id
+    divContainer.className = "container-block"
+    target.appendChild(divContainer)
     
-    const divOffSet = document.createElement('div')
-    divOffSet.id = "offSet"
-    divOffSet.className = "container-block"
-
-    target.appendChild(divOffSet)
-
-    const divEnd = document.createElement('div')
-    divEnd.id = "end"
-    divEnd.className = "container-block"
-
-    target.appendChild(divEnd)
 }
 
-const createHastes = (num) =>{
+const createHastes = (hasteId, targetContainerId) =>{
     const haste = document.createElement("div")
-    if(num === 1){
-        
-        haste.className = "hastes"
-        haste.id = "haste1"
-    }
-    else if(num === 2){
-        
-        haste.className = "hastes"
-        haste.id = "haste2"
-    }
-    else if(num === 3){
-        
-        haste.className = "hastes"
-        haste.id = "haste3"
-    }
-    
-    
-    return haste;
+    haste.className = "hastes"
+    haste.id = hasteId
+    insertHastesInContainer(targetContainerId, haste)
 }
 
-const insertHastes = () => {
+const insertHastesInContainer = (targetContainerId, haste) => {
   
-    const start = document.getElementById("start")
-    start.appendChild(createHastes(1))
-
-    const offSet = document.getElementById("offSet")
-    offSet.appendChild(createHastes(2))
-
-    const end = document.getElementById("end")
-    end.appendChild(createHastes(3))
-
+    const hasteElement = document.getElementById(targetContainerId)
+    hasteElement.appendChild(haste)
 }
 
-createDivs(gameArea)
-insertHastes()
+createContainerOfHaste("start",gameArea)
+createContainerOfHaste("offSet",gameArea)
+createContainerOfHaste("end",gameArea)
+createHastes("haste1", "start")
+createHastes("haste2", "offSet")
+createHastes("haste3", "end")
 
 const createBlocks = (widthBlock, heightBlock, id) => {
     const randomColor = Math.floor(Math.random()* 16777215 ).toString(16);
@@ -76,6 +47,7 @@ const createBlocks = (widthBlock, heightBlock, id) => {
     block.style.height = heightBlock    
     return block
 }
+
 
 const insertBlocks = (level, target) =>{
     let numberOfBlocks = 0 
