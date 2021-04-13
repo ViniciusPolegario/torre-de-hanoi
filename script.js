@@ -8,6 +8,25 @@ let oldWidth = window.innerWidth
 let count = 0
 let reduceWith = 0
 let selectBlock;
+const BLOCK_EASY = {
+    width: 60,
+    height: 45,
+    reduceWith: 16,
+    totalBlocks: 2
+}
+const BLOCK_MEDIUM = {
+    width: 70,
+    height: 22.5,
+    reduceWith: 14, 
+    totalBlocks: 4,
+}
+
+const BLOCK_HARD = {
+    width : 80,
+    height : 15, 
+    reduceWith : 11,
+    totalBlocks : 6,
+}
 
 const createContainerOfHaste = (id,target) =>{
     const divContainer = document.createElement('div')
@@ -30,62 +49,49 @@ const insertHastesInContainer = (targetContainerId, haste) => {
     hasteElement.appendChild(haste)
 }
 
-createContainerOfHaste("start",gameArea)
-createContainerOfHaste("offSet",gameArea)
-createContainerOfHaste("end",gameArea)
+createContainerOfHaste("start", gameArea)
+createContainerOfHaste("offSet", gameArea)
+createContainerOfHaste("end", gameArea)
+
 createHastes("haste1", "start")
 createHastes("haste2", "offSet")
 createHastes("haste3", "end")
 
-const createBlocks = (widthBlock, heightBlock, id) => {
-    const randomColor = Math.floor(Math.random()* 16777215 ).toString(16);
-    const block = document.createElement("div")
-    block.className = "block"
-    block.id = `block${id}`
-    block.style.background = `#${randomColor}`
-    block.style.width = widthBlock    
-    block.style.height = heightBlock    
-    return block
+
+
+const createBlocks = (level) => {
+    let blockDimensions
+    
+    if(level === "easy"){
+        blockDimensions = BLOCK_EASY
+    }else if(level === "medium"){
+        blockDimensions = BLOCK_MEDIUM
+    }else{
+        blockDimensions = BLOCK_HARD
+    }
+
+    let widthBlock = blockDimensions.width
+
+    for(let block = 0; block < blockDimensions.totalBlocks; block++){
+
+        const randomColor = Math.floor(Math.random()* 16777215 ).toString(16);
+
+        const block = document.createElement("div")
+        block.style.width = `${widthBlock}px`
+        block.style.height =  `${blockDimensions.height}px`
+        block.style.background = `#${randomColor}`
+        block.className = "block"
+        
+        insertBlocks(block)
+
+        widthBlock -= blockDimensions.reduceWith
+    }
 }
 
-
-const insertBlocks = (level, target) =>{
-    let numberOfBlocks = 0 
-    let width = 0
-    let height = 0  
-    
-
-    if(level === "easy"){
-        numberOfBlocks = 2
-        width = 60
-        height = 45
-        reduceWith = 16
-
-    }else if(level === "medium"){
-        numberOfBlocks = 4
-        width = 70
-        height = 22.5
-        reduceWith = 14 
-
-    }else{
-        numberOfBlocks = 6
-        width = 80
-        height = 15 
-        reduceWith = 11
-    }
-
-    if(window.innerWidth >= 768){
-        width *= 2
-        reduceWith *= 2
-    }
-    let num = numberOfBlocks;
-    for(let block = 0; block < numberOfBlocks; block++){
-     
-        target.appendChild(createBlocks(`${width}px`,`${height}px`, num))
-        width -= reduceWith
-        num--;
-    }
-
+const insertBlocks = (block) =>{
+    const hasteStart = document.getElementById("haste1")
+   
+    hasteStart.appendChild(block)
 }
 
 
@@ -100,26 +106,26 @@ const reset = () =>{
 }
 
 const start = (nivel) => {
-    reset()
-    victoryScreen.classList.add("hidden")
-    const hasteStart  = document.querySelector("div#start div.hastes")
-    insertBlocks(nivel, hasteStart)
-
-}
-start("easy");
-easy.addEventListener('click',() => {
-    start("easy")
     selectBlock = undefined;
+    reset()
+    
+    victoryScreen.classList.add("hidden")
+   
+    createBlocks(nivel)
+}
+
+start("easy");
+
+easy.addEventListener('click',() => {
+    start("easy")   
 })
 
 medium.addEventListener('click',() =>{
-    start("medium")
-    selectBlock = undefined;
+    start("medium")  
 })
 
 hard.addEventListener('click',() =>{
-    start("hard")
-    selectBlock = undefined;
+    start("hard")  
 })
 /* adicionar blocos e hastes */
 
@@ -210,9 +216,7 @@ const resizeBlocks = () =>{
         for(let block = 0; block < blocks.length; block++){
             let width = blocks[block].style.width.replace("px","")
            
-                 blocks[block].style.width = `${Number(width) * 2}px`
-
-         
+                 blocks[block].style.width = `${Number(width) * 2}px`        
         }
         oldWidth = window.innerWidth
 
@@ -224,15 +228,11 @@ const resizeBlocks = () =>{
             console.log(width)
             
                 blocks[block].style.width = `${Number(width) / 2}px`
-
-           
             
         }
 
              oldWidth = window.innerWidth
-
     }
 }
-
 
 window.addEventListener('resize', resizeBlocks)
