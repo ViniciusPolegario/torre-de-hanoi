@@ -8,6 +8,7 @@ let oldWidth = window.innerWidth
 let count = 0
 let reduceWith = 0
 let selectBlock;
+
 const BLOCK_EASY = {
     width: 60,
     height: 45,
@@ -30,8 +31,8 @@ const BLOCK_HARD = {
 
 const createContainerOfHaste = (id,target) =>{
     const divContainer = document.createElement('div')
-    divContainer.id = id
     divContainer.className = "container-block"
+    divContainer.id = id
     target.appendChild(divContainer)
     
 }
@@ -97,16 +98,16 @@ const insertBlocks = (block) =>{
 
 const reset = () =>{
     const blocks = document.getElementsByClassName("block")
-   
     while(blocks.length > 0){
         blocks[0].remove()
     }
-
+    
+    selectBlock = undefined;
     count = 0;
 }
 
 const start = (nivel) => {
-    selectBlock = undefined;
+    
     reset()
     
     victoryScreen.classList.add("hidden")
@@ -134,6 +135,7 @@ const winningCondition = () =>{
     const totalBlocks = document.getElementsByClassName("block").length
     const blocksInEnd = haste3.childElementCount
     const movements = document.getElementById("movements")
+
     if(totalBlocks === blocksInEnd){
         victoryScreen.classList.remove("hidden")
         movements.innerText = count
