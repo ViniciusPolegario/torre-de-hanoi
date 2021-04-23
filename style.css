@@ -99,6 +99,78 @@ section#section-instructions h1{
 
 /* tela de vitoria */
 
+#block-easy-0 {
+    width: 60px;
+    height: 45px;
+    background-color: #00acfb;
+}
+
+#block-easy-1 {
+    width: 44px;
+    height: 45px;
+    background-color: #006ba1;
+}
+
+#block-medium-0 {
+    width: 70px;
+    height: 22.5px;
+    background-color: #f6a8ec;
+}
+
+#block-medium-1 {
+    width: 56px;
+    height: 22.5px;
+    background-color: #ea86d4;
+}
+
+#block-medium-2 {
+    width: 42px;
+    height: 22.5px;
+    background-color: #8e66a5;
+}
+
+#block-medium-3 {
+    width: 28px;
+    height: 22.5px;
+    background-color: #4d4978;
+}
+
+#block-hard-0 {
+    width : 80px;
+    height : 15px; 
+    background-color: #9f82ff;
+    
+}
+
+#block-hard-1 {
+    width : 69px;
+    height : 15px; 
+    background-color: #ff6bff;
+}
+
+#block-hard-2 {
+    width : 58px;
+    height : 15px; 
+    background-color: #ff8ada;
+}
+
+#block-hard-3 {
+    width : 47px;
+    height : 15px; 
+    background-color: #ffc4bd;
+}
+
+#block-hard-4 {
+    width : 36px;
+    height : 15px; 
+    background-color:  #fff0aa;
+}
+
+#block-hard-5 {
+    width : 25px;
+    height : 15px; 
+    background-color: #ffea40;
+}
 
 div#victory{
     
