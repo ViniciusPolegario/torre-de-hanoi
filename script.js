@@ -5,7 +5,7 @@ const HARD = document.getElementById("hard")
 
 
 let COUNT = 0
-let selectBlock;
+let SELECT_BLOCK;
 
 
 const createDiv = (id, className) => {
@@ -77,19 +77,19 @@ const reset = () =>{
         blocks[0].remove()
     }
     
-    selectBlock = undefined;
+    SELECT_BLOCK = undefined;
 
     COUNT = 0;
 }
 
-const start = (nivel) => {
+const start = (level) => {
     
     reset()
     
     const victoryScreen = document.getElementById("victory")
     victoryScreen.classList.add("hidden")
    
-    createBlocks(nivel)
+    createBlocks(level)
 }
 
 start("easy");
@@ -126,17 +126,16 @@ const END_CONTAINER = document.getElementById("end");
 
 
 
-const mudarBloco = (selectBlock, haste) => {
-
+const changeBlock = (selectBlock, haste) => {
     
-    const lastBloco = haste.lastElementChild;
+    const lastBlock = haste.lastElementChild;
 
-    if (lastBloco === selectBlock ){
+    if (lastBlock === selectBlock ){
         selectBlock.classList.remove("selectBlock")
         haste.appendChild(selectBlock);
         selectBlock = undefined;
     }
-    else if(lastBloco === null || lastBloco.clientWidth > selectBlock.clientWidth ){
+    else if(lastBlock === null || lastBlock.clientWidth > selectBlock.clientWidth ){
         selectBlock.classList.remove("selectBlock")
         haste.appendChild(selectBlock);
         selectBlock = undefined;
@@ -146,47 +145,32 @@ const mudarBloco = (selectBlock, haste) => {
     return selectBlock;
 }
 
+const validateSelectedBlock = (haste) => {
+
+    if ( SELECT_BLOCK !== undefined){
+        SELECT_BLOCK = changeBlock(SELECT_BLOCK, haste);
+    }
+    else if (haste.lastElementChild !== null ){
+        SELECT_BLOCK = haste.lastElementChild;
+        SELECT_BLOCK.classList.add("selectBlock");
+    }
+}
+
 START_CONTAINER.addEventListener('click',() =>{
 
     const haste1 = document.getElementById("haste1");
-
-    
-    if (selectBlock !== undefined){
-        selectBlock = mudarBloco(selectBlock, haste1);
-    }
-    else if (haste1.lastElementChild !== null ){
-        selectBlock = haste1.lastElementChild;
-        selectBlock.classList.add("selectBlock");
-    }
-    
+    validateSelectedBlock(haste1)   
 });
 
 OFFSET_CONTAINER.addEventListener('click',() =>{
 
-    const haste2 = document.getElementById("haste2");
-    
-    if(selectBlock !== undefined){
-        selectBlock =  mudarBloco(selectBlock, haste2);
-    }
-
-    else if(haste2.lastElementChild !== null ){
-        selectBlock = haste2.lastElementChild;
-        selectBlock.classList.add("selectBlock");
-    }
-
+    const haste2 = document.getElementById("haste2");    
+    validateSelectedBlock(haste2)
 });
 
 END_CONTAINER.addEventListener('click',() =>{
     
     const haste3 = document.getElementById("haste3");
-
-    if(selectBlock !== undefined){
-        selectBlock = mudarBloco(selectBlock, haste3);
-    }
-    else if(haste3.lastElementChild !== null ){
-        selectBlock = haste3.lastElementChild;
-        selectBlock.classList.add("selectBlock");
-    }
-
+    validateSelectedBlock(haste3)
     winningCondition();
 });
